@@ -1,0 +1,254 @@
+respawnOnStart = -1;
+enableDebugConsole = 2;
+
+author = "Ed"; // Author
+loadScreen = "img\loading.jpg";
+onLoadName = "State of Charge"; // Mission name (temporary solution; actual name set in editor will be used later in the alpha)
+onLoadMission = "Investigate CSAT involvement with the pacification of Tanoa"; // Description
+
+class CfgFunctions
+{
+	#include "cau\userinputmenus\CfgFunctions.cpp"
+}
+
+#include "cau\userinputmenus\systems\_macros.inc"
+#include "cau\userinputmenus\systems\_defines.inc"
+
+#include "cau\userinputmenus\controls.cpp"
+#include "cau\userinputmenus\systems\displayColorPicker.cpp"
+#include "cau\userinputmenus\systems\displayGuiMessage.cpp"
+#include "cau\userinputmenus\systems\displayListbox.cpp"
+#include "cau\userinputmenus\systems\displayListboxMulti.cpp"
+#include "cau\userinputmenus\systems\displayProgressBar.cpp"
+#include "cau\userinputmenus\systems\displaySlider.cpp"
+#include "cau\userinputmenus\systems\displayText.cpp"
+#include "cau\userinputmenus\systems\displayTextMulti.cpp"
+
+class Header
+{
+	gameType =  Coop;	// Game type
+	minPlayers =  1;	// minimum number of players the mission supports
+	maxPlayers = 5;	// maximum number of players the mission supports
+};
+
+class CfgRoles
+{
+	class Assault_Gear
+	{
+		displayName = "Assault Gear";
+		icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\assault_ca.paa";
+	};
+	class Stealth_Gear
+	{
+		displayName = "Stealth Gear";
+		icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\recon_ca.paa";
+	};
+	class Recon_Gear
+	{
+		displayName = "Recon Gear";
+		icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\support_ca.paa";
+	};
+};
+
+
+class CfgRespawnInventory
+{
+class Squad_Leader_1
+{
+  displayName = "Squad Leader";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_CTRG_Soldier_3_F";
+  backpack = "B_AssaultPack_rgr";
+  weapons[] = {"Laserdesignator_01_khk_F", "arifle_SPAR_01_blk_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "30Rnd_556x45_Stanag", "HandGrenade", "HandGrenade", "HandGrenade", "HandGrenade", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "HandGrenade", "HandGrenade", "HandGrenade", "30Rnd_556x45_Stanag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrier2_rgr_noflag_F", "H_HelmetSpecB_blk", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGoggles_OPFOR", "acc_pointer_IR", "optic_Arco_blk_F", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+//Biki: https://community.bistudio.com/wiki/Arma_3_Respawn#Loadouts_and_Roles
+class Auto_Rifleman_1
+{
+  displayName = "Autorifleman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_CTRG_Soldier_3_F";
+  backpack = "B_AssaultPack_rgr";
+  weapons[] = {"Laserdesignator_01_khk_F", "LMG_Mk200_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "HandGrenade", "HandGrenade", "HandGrenade", "HandGrenade", "200Rnd_65x39_cased_Box_Tracer", "200Rnd_65x39_cased_Box_Tracer", "HandGrenade", "HandGrenade", "HandGrenade", "200Rnd_65x39_cased_Box", "200Rnd_65x39_cased_Box", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrier2_rgr_noflag_F", "H_HelmetSpecB_blk", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGoggles_OPFOR", "acc_pointer_IR", "optic_Arco_blk_F", "bipod_01_F_blk", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+class Assault_1
+{
+  displayName = "Rifleman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_CTRG_Soldier_3_F";
+  backpack = "B_AssaultPack_rgr";
+  weapons[] = {"Laserdesignator_01_khk_F", "arifle_SPAR_01_GL_blk_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "30Rnd_556x45_Stanag", "HandGrenade", "HandGrenade", "HandGrenade", "HandGrenade", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "HandGrenade", "HandGrenade", "HandGrenade", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrier2_rgr_noflag_F", "H_HelmetSpecB_blk", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGoggles_OPFOR", "acc_pointer_IR", "optic_Arco_blk_F", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+class Marksman_1
+{
+  displayName = "Marksman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_T_Sniper_F";
+  backpack = "";
+  weapons[] = {"Laserdesignator_01_khk_F", "srifle_DMR_02_camo_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "HandGrenade", "SmokeShellBlue", "SmokeShellBlue", "SmokeShellBlue", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_Chestrig_oli", "H_HelmetSpecB_blk", "G_Bandanna_beast", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGoggles_OPFOR", "optic_AMS", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+
+
+class Squad_Leader_2
+{
+  displayName = "Squad Leader";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\colonel_gs.paa";
+  role = "Recon_Gear";
+  show = "true";
+  uniformClass = "U_B_CTRG_2";
+  backpack = "B_AssaultPack_khk";
+  weapons[] = {"Rangefinder", "arifle_Katiba_GL_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"Chemlight_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "HandGrenade", "HandGrenade", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrierL_CTRG", "H_HelmetSpecB_blk", "G_Bandanna_beast", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGogglesB_blk_F", "", "acc_pointer_IR", "optic_MRCO", "", "", "", "", ""};
+};
+class Auto_Rifleman_2
+{
+  displayName = "Rifleman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\captain_gs.paa";
+  role = "Recon_Gear";
+  show = "true";
+  uniformClass = "U_B_CTRG_1";
+  backpack = "B_AssaultPack_khk";
+  weapons[] = {"Rangefinder", "LMG_Mk200_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"Chemlight_green", "HandGrenade", "HandGrenade", "200Rnd_65x39_cased_Box_Tracer", "11Rnd_45ACP_Mag", "200Rnd_65x39_cased_Box_Tracer"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrierL_CTRG", "H_HelmetSpecB_snakeskin", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGogglesB_blk_F", "", "acc_pointer_IR", "optic_Arco", "bipod_01_F_blk", "", "", "", ""};
+};
+class Assault_2
+{
+  displayName = "Assault";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Recon_Gear";
+  show = "true";
+  uniformClass = "U_B_CTRG_3";
+  backpack = "B_AssaultPack_khk";
+  weapons[] = {"arifle_Katiba_F", "hgun_Pistol_heavy_01_F", "Rangefinder", "Throw", "Put"};
+  magazines[] = {"Chemlight_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green_mag_Tracer", "HandGrenade", "HandGrenade"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrierL_CTRG", "H_HelmetSpecB_snakeskin", "G_Bandanna_tan", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGogglesB_blk_F", "", "acc_pointer_IR", "optic_MRCO", "", "", "", "", ""};
+};
+class Marksman_2
+{
+  displayName = "Sniper";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\major_gs.paa";
+  role = "Recon_Gear";
+  show = "true";
+  uniformClass = "U_B_GhillieSuit";
+  backpack = "B_AssaultPack_khk";
+  weapons[] = {"srifle_LRR_F", "hgun_Pistol_heavy_01_F", "Rangefinder", "Throw", "Put"};
+  magazines[] = {"Chemlight_green", "7Rnd_408_Mag", "11Rnd_45ACP_Mag", "HandGrenade", "HandGrenade", "7Rnd_408_Mag", "7Rnd_408_Mag", "7Rnd_408_Mag", "7Rnd_408_Mag", "7Rnd_408_Mag", "11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_Chestrig_rgr", "H_Booniehat_khk_hs", "G_Bandanna_beast", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGogglesB_blk_F", "", "", "optic_LRPS", "", "", "", "", ""};
+};
+
+
+class Squad_Leader_3
+{
+  displayName = "Squad Leader";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_CTRG_Soldier_3_F";
+  backpack = "B_AssaultPack_rgr";
+  weapons[] = {"arifle_SPAR_01_blk_F", "hgun_Pistol_heavy_01_F", "Laserdesignator_01_khk_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "30Rnd_556x45_Stanag", "HandGrenade", "HandGrenade", "HandGrenade", "HandGrenade", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Green", "HandGrenade", "HandGrenade", "HandGrenade", "30Rnd_556x45_Stanag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrier2_rgr_noflag_F", "H_HelmetSpecB_blk", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGogglesB_blk_F", "muzzle_snds_M", "acc_pointer_IR", "optic_MRCO", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+class Assault_3
+{
+  displayName = "Rifleman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Assault_Gear";
+  show = "true";
+  uniformClass = "U_B_CTRG_Soldier_Arid_F";
+  backpack = "B_AssaultPack_blk";
+  weapons[] = {"Rangefinder", "arifle_AK12_GL_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "HandGrenade", "HandGrenade", "SmokeShell", "SmokeShell", "11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "30Rnd_762x39_AK12_Mag_Tracer_F", "30Rnd_762x39_AK12_Mag_Tracer_F", "30Rnd_762x39_AK12_Mag_Tracer_F", "30Rnd_762x39_AK12_Mag_Tracer_F", "30Rnd_762x39_AK12_Mag_Tracer_F"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrier2_blk", "H_HelmetSpecB_blk", "G_Balaclava_TI_G_blk_F", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGogglesB_grn_F", "", "acc_pointer_IR", "optic_ERCO_blk_F", "", "", "", "", ""};
+};
+class Auto_Rifleman_3
+{
+  displayName = "Auto Rifleman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\captain_gs.paa";
+  role = "Assault_Gear";
+  show = "true";
+  uniformClass = "U_B_CTRG_3";
+  backpack = "B_AssaultPack_khk";
+  weapons[] = {"Rangefinder", "LMG_03_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"Chemlight_green", "HandGrenade", "HandGrenade", "11Rnd_45ACP_Mag", "200Rnd_556x45_Box_Tracer_Red_F"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_PlateCarrierL_CTRG", "H_HelmetSpecB_snakeskin", "G_Bandanna_aviator", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "ItemGPS", "NVGoggles_OPFOR", "", "acc_pointer_IR", "optic_ERCO_blk_F", "", "", "", "", ""};
+};
+class Marksman_3
+{
+  displayName = "Marksman";
+  icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+  role = "Default";
+  show = "true";
+  uniformClass = "U_B_T_Sniper_F";
+  backpack = "";
+  weapons[] = {"Laserdesignator_01_khk_F", "srifle_DMR_02_camo_F", "hgun_Pistol_heavy_01_F", "Throw", "Put"};
+  magazines[] = {"11Rnd_45ACP_Mag", "11Rnd_45ACP_Mag", "HandGrenade", "SmokeShellBlue", "SmokeShellBlue", "SmokeShellBlue", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "10Rnd_338_Mag", "11Rnd_45ACP_Mag"};
+  items[] = {"FirstAidKit", "FirstAidKit", "FirstAidKit", "FirstAidKit"};
+  linkedItems[] = {"V_Chestrig_oli", "H_HelmetSpecB_blk", "G_Bandanna_beast", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "B_UavTerminal", "NVGogglesB_grn_F", "muzzle_snds_338_black", "optic_AMS", "muzzle_snds_acp", "acc_flashlight_pistol", "optic_MRD"};
+};
+};
+
+class CfgSounds {
+    sounds[] = {};
+    
+    class in2a
+	{
+	name = "in2a";
+	sound[] = {"@A3\Dubbing_Radio_F\sfx\in2a.ogg",1,1.1};
+	titles[] = {};
+	};
+
+    class out2a
+	{
+	name = "out2a";
+	sound[] = {"@A3\Dubbing_Radio_F\sfx\out2a.ogg",1,1};
+	titles[] = {};
+	};
+	
+class phone_ringing{name = "phone_ringing";		sound[] = {"snd\general\phone_ringing.ogg",1,1};			titles[] = {};};
+class phone_beep{name = "phone_beep";		sound[] = {"snd\general\phone_beep.ogg",db-9,1};			titles[] = {};};
+class phone_end{name = "phone_end";		sound[] = {"snd\general\phone_end.ogg",1,1};					titles[] = {};};
+class diary_updated{name = "diary_updated";		sound[] = {"snd\general\diary_updated.ogg",db+10,1};		titles[] = {};};
+class unzip_bag{name = "unzip_bag";		sound[] = {"snd\general\unzip_bag.ogg",db+15,1};				titles[] = {};};
+class inspect_clothing{name = "inspect_clothing";		sound[] = {"snd\general\inspect_clothing.ogg",db+10,1};				titles[] = {};};
+class photo_shutter{name = "photo_shutter";		sound[] = {"snd\general\photo_shutter.ogg",db+1,1};				titles[] = {};};
+class door_knock{name = "door_knock";		sound[] = {"snd\general\door_knock.ogg",db+20,1};				titles[] = {};};
+class email_sound{name = "email_sound";		sound[] = {"snd\general\email_sound.ogg",db+1,1};				titles[] = {};};
+class keyboard_typing{name = "keyboard_typing";		sound[] = {"snd\general\keyboard_typing.ogg",db+15,1};				titles[] = {};};
+class phone_unlock{name = "phone_unlock";		sound[] = {"snd\general\phone_unlock.ogg",db+1,1};				titles[] = {};};
+class phone_lost{name = "phone_lost";		sound[] = {"snd\general\phone_lost.ogg",db+1,1};				titles[] = {};};
+class electrical_spark{name = "electrical_spark";		sound[] = {"snd\general\electrical_spark.ogg",db+1,1};				titles[] = {};};
+class spotlight_on{name = "spotlight_on";		sound[] = {"snd\general\spotlight_on.ogg",db+10,1};				titles[] = {};};
+class spotlight_fizz{name = "spotlight_fizz";		sound[] = {"snd\general\spotlight_fizz.ogg",db+1,1};				titles[] = {};};
+class power_down{name = "power_down";		sound[] = {"snd\general\power_down.ogg",db+35,1};				titles[] = {};};
+class electrical_lever{name = "electrical_lever";		sound[] = {"snd\general\electrical_lever.ogg",db+20,1};				titles[] = {};};
+
+};
